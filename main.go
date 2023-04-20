@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 
@@ -27,5 +26,11 @@ func main() {
 		log.Fatal(err)
 	}
 	// Print user details
-	fmt.Println(u)
+	log.Println(u)
+	records, r, err := api.ListDNSRecords(ctx, cloudflare.ZoneIdentifier(u.ID), cloudflare.ListDNSRecordsParams{})
+	if err != nil {
+		return
+	}
+
+	log.Println(records, r)
 }
